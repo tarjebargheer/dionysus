@@ -55,21 +55,23 @@ def plot_diagram_density(dgm, bins = 200, lognorm = True, diagonal = True, show 
 
     inf = float('inf')
     min_birth = min(p.birth for p in dgm if p.birth != inf)
-    #max_birth = max(p.birth for p in dgm if p.birth != inf)
+    #max_birth = max(p.birth for p in dgm if p.birth !=inf)
     #min_death = min(p.death for p in dgm if p.death != inf)
     max_death = max(p.death for p in dgm if p.death != inf)
 
     plt.hist2d([p.birth for p in dgm if p.birth != inf and p.death != inf], [p.death for p in dgm if p.birth != inf and p.death != inf], bins = bins, norm = norm)
     plt.axes().set_aspect('equal', 'datalim')
-
+    plt.axes().set_xlabel("birth")
+    plt.axes().set_ylabel("death")
+    
     if diagonal:
         plt.plot([min_birth, max_death], [min_birth, max_death])        # diagonal
 
     ## clip the view
-    #plt.axes().set_xlim([min_birth, max_birth])
+    #plt.axes().set_xlim([min_birth,yla max_birth])
     #plt.axes().set_ylim([min_death, max_death])
 
-    plt.colorbar()
+    plt.colorbar(label = "iterations alive")
 
     if show:
         plt.show()
